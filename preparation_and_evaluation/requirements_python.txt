@@ -1,0 +1,29 @@
+That's an excellent next step for preparing your code for Git. A `requirements.txt` file is essential for ensuring anyone can easily reproduce your Python environment.
+
+Based on the described functionality (Deep Learning with deepCIS, bioinformatics handling, data processing, and statistical analysis), here are the likely Python package requirements for your project, formatted for inclusion in your proposed `requirements.txt` file:
+
+### `requirements.txt`
+
+``` 
+# Core Scientific Computing and Data Handling
+numpy>=1.20.0        # Essential for array operations
+pandas>=1.2.0        # Data manipulation and CSV handling
+
+# Deep Learning Framework (for deepCIS prediction)
+tensorflow>=2.5.0    # The deep learning framework used by Keras/DeepCIS
+keras>=2.5.0         # Deep learning API (often bundled with TensorFlow)
+h5py>=3.0.0          # Required for loading and saving the .h5 model file
+
+# Bioinformatics and Sequence Handling (for Phase I: Preprocessing)
+biopython>=1.78      # Required for FASTA parsing and sequence manipulation (e.g., reverse complement)
+
+# Statistical Analysis and Machine Learning (for Phase IV: Evaluation)
+scikit-learn>=0.24.0 # Used for regression, metrics (e.g., MCC, F1), and statistical tests
+
+# Visualization and Plotting (used by analysis and evaluation scripts)
+matplotlib>=3.3.0    # Standard plotting library
+seaborn>=0.11.0      # Enhanced statistical data visualization
+
+```
+
+**Note:** The version numbers provided (`>=X.Y.Z`) are suggestions for modern, compatible versions. You should confirm the exact versions used in your existing environment by running `pip freeze > requirements.txt` on your working setup to ensure perfect reproducibility.
