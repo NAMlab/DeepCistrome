@@ -1,7 +1,6 @@
 
-### Updated Folder Content Summary and Pipeline
-
-The scripts in your folder can be categorized into five distinct phases, forming a cohesive bioinformatics analysis pipeline:
+### Updated Comments on Contents after revision of Peleke et al., 2025 "Modelling genetic variation effects in plant gene regulatory networks using transfer learning on genomic and transcription factor binding data"
+The scripts in this folder are categorized into five distinct phases, forming a cohesive bioinformatics analysis pipeline:
 
 1.  **FASTA Sequence Pre-processing:** A robust set of Python scripts and a master shell script (`prepare_candidate_hubs.sz.1.sh`) are dedicated to preparing high-quality FASTA files for the deepCIS model. This includes tasks like parsing GFF annotations for promoter orientation, ensuring control/variant sequence pairing, filtering for sequence redundancy, and handling reverse complementation. This pipeline has been used to prepare the sequence targets candidates for Plant STARR seq.
 2.  **DeepCIS Prediction:** Core Python scripts (`dCIS_predict.*.py`) handle the loading of the neural network model and converting cleaned FASTA sequences into one-hot encoded input for generating the raw TFBS prediction and probability matrices.
@@ -11,7 +10,7 @@ The scripts in your folder can be categorized into five distinct phases, forming
 
 -----
 
-### Input/Output and Script Order Table (English)
+### Input/Output and Script Order Table
 All required Input data are provided with the Supplementary Materials of Peleke et al., 2025 "Modelling genetic variation effects in plant gene regulatory networks using transfer learning on genomic and transcription factor binding data".
 The evaluation scripts have beeen designed to start with the overall prediction results across the A. thaliana col-0 TAIR10 genome found in the data/all_actual and data/all_predictions file. This data can be found e.g. supplementary table 1 too.
 The results on IPM occurences are proved in suppl. table 4.
