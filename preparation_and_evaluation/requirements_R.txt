@@ -1,0 +1,44 @@
+### R Package Requirements
+
+| Category                 | Package Name       | Purpose in your project                                                                                                                                                              | Installation Command (CRAN)              |
+| :----------------------- | :----------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :--------------------------------------- |
+| **Core Data Handling**   | **dplyr**          | Comprehensive data manipulation, filtering, and summarization. Essential for pipeline steps.                                                                                         | `install.packages("dplyr")`              |
+|                          | **tidyr**          | Tools for tidying data, reshaping wide/long format (e.g., for plotting).                                                                                                             | `install.packages("tidyr")`              |
+| **Visualization**        | **ggplot2**        | The most common package for high-quality, customizable statistical graphics (e.g., boxplots, regression plots, network visualization).                                               | `install.packages("ggplot2")`            |
+| **Statistics & Testing** | **stats** (Base R) | Contains core functions like `kruskal.test()` (Kruskal-Wallis) and `wilcox.test()` (Wilcoxon Rank Sum) used in your mutation analysis script.                                        | *(Base package, no installation needed)* |
+| **Network Analysis**     | **igraph**         | Essential for constructing, analyzing, and visualizing the TFBS co-occurrence network in scripts like `dCIS_motif_multi_variant_comparison.sz.0.R`.                                  | `install.packages("igraph")`             |
+| **Model Fitting**        | **lmtest**         | Often used for checking assumptions and enhancing the output of linear models (`lm`) or logistic models used for predictability analysis (e.g., in your `Peleke-et-al-2025` script). | `install.packages("lmtest")`             |
+| **Reporting**            | **readr**          | Fast and friendly way to read delimited data files (like CSVs).                                                                                                                      | `install.packages("readr")`              |
+
+### Suggested `setup_packages.R` Content
+
+For maximum reproducibility, you can use a script like this to ensure all packages are installed and loaded:
+
+``` r
+# List of required packages
+required_packages <- c(
+    "dplyr",      # Data manipulation
+    "tidyr",      # Data tidying
+    "ggplot2",    # Visualization
+    "igraph",     # Network analysis
+    "readr",      # Fast CSV reading
+    "lmtest"      # Statistical tests (if used for regression diagnostics)
+)
+
+# Function to check, install, and load packages
+install_and_load <- function(packages) {
+    for (pkg in packages) {
+        if (!require(pkg, character.only = TRUE)) {
+            install.packages(pkg, dependencies = TRUE)
+            library(pkg, character.only = TRUE)
+        }
+    }
+}
+
+# Execute the function
+install_and_load(required_packages)
+
+# Ensure R's core 'stats' package is available for Kruskal-Wallis/Wilcoxon tests
+# (It's loaded by default, but good to be aware)
+
+```
