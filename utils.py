@@ -111,9 +111,13 @@ def compiled_model(window_size, num_tf_fam, label_weights):
 
 
 def train_model(genome, batch_size, train_overlap_mat, valid_overlap_mat, window_size, chrom, label_weights,
-                control):
-    model_save_name = f"saved_models/model_chrom_{chrom}_{control}.h5"
-    cvs_log_save_name = f"results/csv_{chrom}_{control}.log"
+                control, weighted_class=False):
+    if weighted_class:
+        model_save_name = f"saved_models/model_chrom_{chrom}_{control}_weighted.h5"
+        cvs_log_save_name = f"results/csv_{chrom}_{control}_weighted.log"
+    else:
+        model_save_name = f"saved_models/model_chrom_{chrom}_{control}.h5"
+        cvs_log_save_name = f"results/csv_{chrom}_{control}.log"
 
     if not os.path.exists(model_save_name) and not os.path.exists(cvs_log_save_name):
         train_gen = InputGenerator(genome=genome, bins_list=train_overlap_mat.index.tolist(), batch_size=batch_size,
@@ -123,9 +127,21 @@ def train_model(genome, batch_size, train_overlap_mat, valid_overlap_mat, window
 
         model = compiled_model(window_size=window_size, num_tf_fam=train_overlap_mat.shape[1],
                                label_weights=label_weights)
-        model.fit(train_gen, validation_data=valid_gen, epochs=50,
-                  callbacks=[
-                      ModelCheckpoint(filepath=model_save_name, monitor='val_loss', save_best_only=True, verbose=1),
-                      EarlyStopping(patience=5),
-                      CSVLogger(cvs_log_save_name)
-                  ])
+
+        if weighted_class:
+            weights = (1 - label_weights/max(label_weights))+0.02
+            class_weights = {k:v for k,v in enumerate(weights)}
+            print('These are the class weights:\n', class_weights)
+            model.fit(train_gen, validation_data=valid_gen, epochs=50,
+                      callbacks=[
+                          ModelCheckpoint(filepath=model_save_name, monitor='val_loss', save_best_only=True, verbose=1),
+                          EarlyStopping(patience=5),
+                          CSVLogger(cvs_log_save_name)
+                      ], class_weight=class_weights)
+        else:
+            model.fit(train_gen, validation_data=valid_gen, epochs=50,
+                      callbacks=[
+                          ModelCheckpoint(filepath=model_save_name, monitor='val_loss', save_best_only=True, verbose=1),
+                          EarlyStopping(patience=5),
+                          CSVLogger(cvs_log_save_name)
+                      ])

@@ -1,3 +1,13 @@
+[![Python 3.8](https://img.shields.io/badge/Python-3.8-blue.svg?logo=python&logoColor=white)](https://www.python.org/downloads/release/python-380/)
+[![TensorFlow 2.10](https://img.shields.io/badge/TensorFlow-2.10-orange.svg?logo=tensorflow&logoColor=white)](https://www.tensorflow.org/)
+[![pyfaidx](https://img.shields.io/badge/pyfaidx-latest-green.svg)](https://github.com/mdshw5/pyfaidx)
+[![matplotlib](https://img.shields.io/badge/matplotlib-latest-blue.svg?logo=python&logoColor=white)](https://matplotlib.org/)
+[![pandas](https://img.shields.io/badge/pandas-latest-150458.svg?logo=pandas&logoColor=white)](https://pandas.pydata.org/)
+[![bedtools](https://img.shields.io/badge/bedtools-latest-success.svg)](https://bedtools.readthedocs.io/)
+[![DeepSHAP](https://img.shields.io/badge/DeepSHAP-SHAP-red.svg)](https://github.com/shap/shap)
+[![Conda](https://img.shields.io/badge/Conda-latest-44A833.svg?logo=anaconda&logoColor=white)](https://docs.conda.io/)
+
+
 ## Modelling genetic variation effects in plant gene regulatory networks using transfer learning on genomic and transcription factor binding data
 
 ### Preparing the necessary data
